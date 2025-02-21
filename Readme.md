@@ -35,7 +35,7 @@ To get started with this React application, follow these steps:
 
 3. **Start the development server**:
     ```sh
-    npm start
+    npm run dev
     ```
 
 Now you're ready to start working on the project!
