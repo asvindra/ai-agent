@@ -1,7 +1,7 @@
 # Project Name
 
 ## Overview
-This project is a React application that [briefly describes your project].
+This project is a React application based on AI Agents
 
 ## .gitignore Explanation
 
@@ -24,8 +24,8 @@ To get started with this React application, follow these steps:
 
 1. **Clone the repository**:
     ```sh
-    git clone [repository URL]
-    cd [repository name]
+    git clone https://github.com/asvindra/ai-agent
+    cd ai-agent
     ```
 
 2. **Install dependencies**:
