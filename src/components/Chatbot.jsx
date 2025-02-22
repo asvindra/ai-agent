@@ -4,6 +4,7 @@ import api from '@/api';
 import { parseSSEStream } from '@/utils';
 import ChatMessages from '@/components/ChatMessages';
 import ChatInput from '@/components/ChatInput';
+import './Chatbot.css'
 
 function Chatbot() {
   const [chatId, setChatId] = useState(null);
@@ -49,7 +50,7 @@ function Chatbot() {
   }
 
   return (
-    <div className='relative grow flex flex-col gap-6 pt-6'>
+    <div className='flex w-full max-w-3xl height mx-auto px-4 relative grow flex flex-col gap-6 pt-6'>
       {messages.length === 0 && (
         <div className='mt-3 font-urbanist text-blue text-xl font-light space-y-2'>
           <p>👋 Welcome to AI Agent!</p>
@@ -59,12 +60,14 @@ function Chatbot() {
       <ChatMessages
         messages={messages}
         isLoading={isLoading}
+        className='flex-grow'
       />
       <ChatInput
         newMessage={newMessage}
         isLoading={isLoading}
         setNewMessage={setNewMessage}
         submitNewMessage={submitNewMessage}
+        className='mt-auto'
       />
     </div>
   );

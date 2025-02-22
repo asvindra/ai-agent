@@ -1,0 +1,89 @@
+  .dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .dashboard-header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .dashboard-header h1 {
+    margin: 0;
+  }
+  
+  .dashboard-header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0 0;
+  }
+  
+  .dashboard-header nav ul li {
+    margin: 0 1rem;
+  }
+  
+  .dashboard-header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .dashboard-content {
+    display: flex;
+    flex: 1;
+  }
+  
+  .dashboard-sidebar {
+    background-color: #444;
+    color: #fff;
+    padding: 1rem;
+    width: 200px;
+  }
+  
+  .dashboard-sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .dashboard-sidebar ul li {
+    margin: 1rem 0;
+  }
+  
+  .dashboard-sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .dashboard-main {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+  
+  .dashboard-section {
+    margin-bottom: 2rem;
+  }
+  
+  .profile-card, .settings-card {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logs-list, .workouts-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .log-item, .workout-item {
+    background-color: #fff;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
