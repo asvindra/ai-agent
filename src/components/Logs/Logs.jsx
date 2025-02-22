@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Logs.css";
+import { post } from "@/api";
 
 const Logs = () => {
   const [calories, setCalories] = useState("");
@@ -19,16 +20,14 @@ const Logs = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/log", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    const response = await post(
+      "/log",
+      {
         calories: Number(calories),
         activityLevel: Number(activityLevel),
-      }),
-    });
+      },
+      ""
+    );
     const data = await response.json();
     setMessage(data.message);
   };

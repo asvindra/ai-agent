@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import './Login.css'; // Import the CSS file for styling
+import React, { useState } from "react";
+import "./Login.css"; // Import the CSS file for styling
+import Toaster from "../Toaster";
+import { get, post } from "@/api";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent the default form submission
@@ -15,24 +19,19 @@ const Login = () => {
     };
 
     try {
-      const response = await fetch('https://your-api-endpoint.com/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await post("/login", JSON.stringify(formData));
 
       if (response.ok) {
-        const data = await response.json();
-        console.log('Login successful', data);
-        // Handle successful login (e.g., redirect to another page)
+        const data = response.json();
+        localStorage.setItem("userId", data.userId);
+        console.log("Login successful", data);
+        navigate("/dashboard");
+        return <Toaster type="success" message="Login successful" />;
       } else {
-        console.error('Login failed', response.statusText);
-        // Handle login failure (e.g., show error message)
+        return <Toaster type="error" message="Login failed." />;
       }
     } catch (error) {
-      console.error('Error submitting form', error);
+      console.error("Error submitting form", error);
       // Handle error (e.g., show error message)
     }
   };
@@ -64,7 +63,9 @@ const Login = () => {
               required
             />
           </div>
-          <button type="submit" className="login-button">Login</button>
+          <button type="submit" className="login-button">
+            Login
+          </button>
         </form>
       </div>
     </div>

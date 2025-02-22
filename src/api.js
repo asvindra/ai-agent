@@ -1,7 +1,7 @@
 const BASE_URL = "http://localhost:3001";
-const API_BASE_URL = "https://your-api-endpoint.com";
+const API_BASE_URL = "/api";
 
-async function createChat(token) {
+export async function createChat(token) {
   const res = await fetch(BASE_URL + "/chats", {
     method: "POST",
     headers: {
@@ -16,7 +16,7 @@ async function createChat(token) {
   return data;
 }
 
-async function sendChatMessage(chatId, message, token) {
+export async function sendChatMessage(chatId, message, token) {
   const res = await fetch(BASE_URL + `/chats/${chatId}`, {
     method: "POST",
     headers: {
@@ -31,15 +31,15 @@ async function sendChatMessage(chatId, message, token) {
   return res.body;
 }
 
-const handleResponse = async (response) => {
+export async function handleResponse(response) {
   if (response.ok) {
     return await response.json();
   } else {
     throw new Error(response.statusText);
   }
-};
+}
 
-const get = async (endpoint, token) => {
+export async function get(endpoint, token) {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: "GET",
@@ -52,9 +52,9 @@ const get = async (endpoint, token) => {
   } catch (error) {
     throw error;
   }
-};
+}
 
-const post = async (endpoint, data, token) => {
+export async function post(endpoint, data, token) {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: "POST",
@@ -68,9 +68,9 @@ const post = async (endpoint, data, token) => {
   } catch (error) {
     throw error;
   }
-};
+}
 
-const put = async (endpoint, data, token) => {
+export async function put(endpoint, data, token) {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: "PUT",
@@ -84,9 +84,9 @@ const put = async (endpoint, data, token) => {
   } catch (error) {
     throw error;
   }
-};
+}
 
-const deleteRequest = async (endpoint, token) => {
+export async function deleteRequest(endpoint, token) {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: "DELETE",
@@ -99,13 +99,4 @@ const deleteRequest = async (endpoint, token) => {
   } catch (error) {
     throw error;
   }
-};
-
-export default {
-  createChat,
-  sendChatMessage,
-  get,
-  post,
-  put,
-  deleteRequest,
-};
+}

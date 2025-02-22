@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useImmer } from "use-immer";
-import api from "@/api";
+import { createChat, sendChatMessage } from "@/api";
 import { parseSSEStream } from "@/utils";
 import ChatMessages from "@/components/ChatBot/ChatMessages";
 import ChatInput from "@/components/ChatBot/ChatInput";
@@ -27,12 +27,12 @@ function Chatbot() {
     let chatIdOrNew = chatId;
     try {
       if (!chatId) {
-        const { id } = await api.createChat();
+        const { id } = await createChat();
         setChatId(id);
         chatIdOrNew = id;
       }
 
-      const stream = await api.sendChatMessage(chatIdOrNew, trimmedMessage);
+      const stream = await sendChatMessage(chatIdOrNew, trimmedMessage);
       for await (const textChunk of parseSSEStream(stream)) {
         setMessages((draft) => {
           draft[draft.length - 1].content += textChunk;
