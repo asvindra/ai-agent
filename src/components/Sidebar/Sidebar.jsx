@@ -5,8 +5,9 @@ import {
   FaSignOutAlt,
   FaQuestionCircle,
   FaSignInAlt,
+  FaWpforms,
 } from "react-icons/fa";
-import { LuActivity } from 'react-icons/lu';
+import { LuActivity } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
@@ -26,8 +27,11 @@ function Sidebar() {
       case "help":
         navigate("/help");
         break;
-      case 'recommendations':
+      case "recommendations":
         navigate("/recommendations");
+        break;
+      case "onboarding":
+        navigate("/onboarding");
         break;
 
       default:
@@ -35,28 +39,40 @@ function Sidebar() {
     }
   };
   return (
-    <div className="h-full w-20 fixed top-0 left-0 bg-gray-900 p-5">
-      <h2 className="text-white text-center text-2xl mb-5">AI</h2>
+    <div className="h-full w-20 fixed top-0 left-0 bg-gray-800 p-5">
+      <h2 className="text-white text-center text-2xl mb-5">FAA</h2>
       <ul className="list-none p-0">
-        <li className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer"  onClick={() => handleOnClick("dashboard")}>
+        <li
+          className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer"
+          onClick={() => handleOnClick("dashboard")}
+        >
           <FaDashcube
             className="mx-auto mb-1"
             onClick={() => handleOnClick("dashboard")}
           />
         </li>
-        <li className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer"  onClick={() => handleOnClick("logs")}>
-          <FaComments
-            className="mx-auto mb-1"
-           
-          />
+        <li
+          className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer"
+          onClick={() => handleOnClick("logs")}
+        >
+          <FaComments className="mx-auto mb-1" />
         </li>
-        <li className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer" onClick={()=>handleOnClick("recommendations")}>
-          <LuActivity className="mx-auto mb-1"  />
+        <li
+          className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer"
+          onClick={() => handleOnClick("recommendations")}
+        >
+          <LuActivity className="mx-auto mb-1" />
         </li>
         <li className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer">
           <FaQuestionCircle
             className="mx-auto mb-1"
             onClick={() => handleOnClick("help")}
+          />
+        </li>
+        <li className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer">
+          <FaWpforms
+            className="mx-auto mb-1"
+            onClick={() => handleOnClick("onboarding")}
           />
         </li>
         <li className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer">
