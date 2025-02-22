@@ -1,4 +1,5 @@
 // src/components/DailyRecommendations.js
+import { get } from '@/api';
 import React, { useEffect, useState } from 'react';
 
 const DailyRecommendations = ({ userId }) => {
@@ -17,14 +18,13 @@ const DailyRecommendations = ({ userId }) => {
     const fetchRecommendations = async () => {
       try {
         // Uncomment the following lines when the API is ready
-        // const response = await fetch(`/api/recommendations/${userId}`);
+        const response = await get(`/profile/67b9d493929befe3de9a94f9`);
         // if (!response.ok) {
         //   throw new Error('Network response was not ok');
         // }
         // const data = await response.json();
-        // setRecommendations(data.recommendations);
+        setRecommendations(response);
 
-        // For now, use mock data
         setRecommendations(mockRecommendations);
       } catch (err) {
         setError('Failed to fetch recommendations: ' + err.message);

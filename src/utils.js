@@ -11,3 +11,27 @@ export async function* parseSSEStream(stream) {
     } 
   }
 }
+
+// gat item
+export const getItem = (key) => {
+  if (typeof window !== 'undefined') {
+    return window.localStorage.getItem(key);
+  }
+};
+
+export const  getAccessToken = () => {
+  return getItem('accessToken');
+}
+
+//set item to local storage
+
+export const setItem = (key, value) => {
+
+  if (typeof window !== 'undefined') {
+    return window.localStorage.setItem(key, value);
+  }
+}
+
+const setAccessToken = (value) => {
+  setAccessToken(value)
+}

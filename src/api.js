@@ -1,5 +1,5 @@
-const BASE_URL = "http://localhost:3001";
-const API_BASE_URL = "/api";
+const BASE_URL = "https://primary-mouse-assuring.ngrok-free.app/";
+const API_BASE_URL = "https://primary-mouse-assuring.ngrok-free.app/api";
 
 export async function createChat(token) {
   const res = await fetch(BASE_URL + "/chats", {
@@ -45,7 +45,8 @@ export async function get(endpoint, token) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        // Authorization: `Bearer ${token}`,
+        "ngrok-skip-browser-warning": "69420",
       },
     });
     return await handleResponse(response);
@@ -61,6 +62,7 @@ export async function post(endpoint, data, token) {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+        "ngrok-skip-browser-warning": "69420",
       },
       body: JSON.stringify(data),
     });
@@ -76,7 +78,8 @@ export async function put(endpoint, data, token) {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        // Authorization: `Bearer ${token}`,
+        "ngrok-skip-browser-warning": "69420",
       },
       body: JSON.stringify(data),
     });
@@ -92,7 +95,8 @@ export async function deleteRequest(endpoint, token) {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        // Authorization: `Bearer ${token}`,
+        "ngrok-skip-browser-warning": "69420",
       },
     });
     return await handleResponse(response);

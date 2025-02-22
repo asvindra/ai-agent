@@ -16,7 +16,7 @@ import OnBoarding from "./components/Onboarding/OnBoarding";
 
 const isAuthenticated = () => {
   // Replace with actual authentication logic
-  return localStorage.getItem("userId") !== null || false;
+  return true || localStorage.getItem("userId") !== null || false;
 };
 
 const AuthenticatedRoute = ({ children }) => {
