@@ -43,9 +43,13 @@ jobs:
         run: |
           ls
           node --version
-          npm install --production
+          npm ci
         env:
           CI: false
+          
+      - name: Verify Vite Installation
+        run: |
+          npx vite --version
 
       - name: create .env file
         run: |
