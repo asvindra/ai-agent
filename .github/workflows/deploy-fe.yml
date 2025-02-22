@@ -1,0 +1,71 @@
+---
+name: Build and Deploy to CloudFront
+on:
+  workflow_dispatch:
+    
+run-name: Deployed to cloudfront
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash
+    env:
+      BUCKET: ${{ secrets.frontend_s3bucket }}
+      DIST: ${{ secrets.frontend_code_directory }}
+      REGION: ${{ secrets.aws_region }}
+      DIST_ID: ${{ secrets.cloudfront_distribution_id }}
+      IAM_ROLE: ${{ secrets.iam_role }}
+      BUCKET: ${{ secrets.frontend_s3bucket }}
+      DIST_ID: ${{ secrets.cloudfront_distribution_id }}
+      IAM_ROLE: ${{ secrets.iam_role }}
+    steps:
+      - name: Print chosen branch name
+        run: |
+          echo "Chosen environment: ${{ github.event.inputs.chosen_env }}"
+          echo "Branch name: ${{ github.ref_name }}"
+      
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ env.IAM_ROLE }}
+          role-session-name: github-actions-federation
+          aws-region: ${{ env.REGION }}
+      
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 20.9.0
+      - name: Install Dependencies
+        run: |
+          ls
+          node --version
+          npm install --production
+        env:
+          CI: false
+
+      - name: create .env file
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+          
+      
+      
+      - name: Build
+        run: |
+          CI=false npm run build
+          
+      - name: Copy files to the S3 website with the AWS CLI
+
+        run: |
+          aws s3 sync --delete ${{ env.DIST }} s3://${{ env.BUCKET }}
+      
+      - name: Copy files to the website with the AWS CLI
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ env.DIST_ID }} \
+            --paths "/*"
