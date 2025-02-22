@@ -20,9 +20,7 @@ jobs:
       REGION: ${{ secrets.aws_region }}
       DIST_ID: ${{ secrets.cloudfront_distribution_id }}
       IAM_ROLE: ${{ secrets.iam_role }}
-      BUCKET: ${{ secrets.frontend_s3bucket }}
-      DIST_ID: ${{ secrets.cloudfront_distribution_id }}
-      IAM_ROLE: ${{ secrets.iam_role }}
+      
     steps:
       - name: Print chosen branch name
         run: |
