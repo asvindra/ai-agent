@@ -7,7 +7,7 @@ import Header from './components/Header';
 
 const isAuthenticated = () => {
   // Replace with actual authentication logic
-  return false || localStorage.getItem('authToken') !== null;
+  return true || localStorage.getItem('authToken') !== null;
 };
 
 const AuthenticatedRoute = ({ children }) => {
