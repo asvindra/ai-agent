@@ -4,6 +4,8 @@ import App from './App';
 import Login from './components/Login';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
+import Logs from './components/Logs';
+import Help from './components/Help';
 
 const isAuthenticated = () => {
   // Replace with actual authentication logic
@@ -26,6 +28,8 @@ const AppRouter = () => {
         {isAuthenticated() && <Sidebar />}
         <Routes>
           <Route path="/login" element={<NonAuthenticatedRoute><Login /></NonAuthenticatedRoute>} />
+          <Route path="/logs" element={<AuthenticatedRoute><Logs /></AuthenticatedRoute>} />
+          <Route path="/help" element={<AuthenticatedRoute><Help /></AuthenticatedRoute>} />
           <Route path="/*" element={<AuthenticatedRoute><App /></AuthenticatedRoute>} />
         </Routes>
       </div>

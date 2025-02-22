@@ -1,7 +1,7 @@
-# Project Name
+# Fitness AI Agents
 
 ## Overview
-This project is a React application based on AI Agents
+This project is a React application based on Fitness AI Agents
 
 ## .gitignore Explanation
 
