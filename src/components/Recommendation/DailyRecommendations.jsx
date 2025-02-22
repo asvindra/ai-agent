@@ -1,11 +1,16 @@
 // src/components/DailyRecommendations.js
-import { get } from '@/api';
-import React, { useEffect, useState } from 'react';
+import { get } from "@/api";
+import { getAccessToken } from "@/utils";
+import React, { useEffect, useState } from "react";
+import Toaster from "../Toaster";
+import Spinner from "../Spinner";
+import moment from "moment";
 
 const DailyRecommendations = ({ userId }) => {
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState("");
 
   // Mock data for demonstration
   const mockRecommendations = [
@@ -18,16 +23,16 @@ const DailyRecommendations = ({ userId }) => {
     const fetchRecommendations = async () => {
       try {
         // Uncomment the following lines when the API is ready
-        const response = await get(`/profile/67b9d493929befe3de9a94f9`);
-        // if (!response.ok) {
-        //   throw new Error('Network response was not ok');
-        // }
+        const response = await get(`/recommendations/${getAccessToken()}/`);
+        if (response) {
+          setMessage(response.details);
+        } else {
+          setMessage(response.details);
+        }
         // const data = await response.json();
-        setRecommendations(response);
-
-        setRecommendations(mockRecommendations);
+        setRecommendations(response.recommendations);
       } catch (err) {
-        setError('Failed to fetch recommendations: ' + err.message);
+        setMessage("Failed to fetch recommendations: " + err.message);
       } finally {
         setLoading(false);
       }
@@ -36,19 +41,28 @@ const DailyRecommendations = ({ userId }) => {
     fetchRecommendations();
   }, [userId]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (loading) return <Spinner />;
 
   return (
     <div className="flex w-full max-w-3xl height mx-auto px-4 relative grow flex flex-col gap-6 pt-6">
       <h2 className="text-xl font-bold mb-4">Daily Recommendations</h2>
+      {recommendations?.length === 0 && (
+        <h6>There are no recommendations available.</h6>
+      )}
       <ul className="list-disc pl-5">
         {recommendations.map((rec, index) => (
           <li key={index} className="mb-2">
-            <span className="font-medium">{rec.task}</span> - Due by {new Date(rec.dueDate).toLocaleDateString()}
+            <span className="font-medium">{rec.task}</span> - Due by{" "}
+            {moment(rec.dueDate).toDate().toISOString()}
           </li>
         ))}
       </ul>
+      {message && (
+        <Toaster
+          type={message.includes("successfull") ? "success" : "error"}
+          message={message}
+        />
+      )}
     </div>
   );
 };

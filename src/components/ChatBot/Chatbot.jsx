@@ -5,6 +5,7 @@ import { parseSSEStream } from "@/utils";
 import ChatMessages from "@/components/ChatBot/ChatMessages";
 import ChatInput from "@/components/ChatBot/ChatInput";
 import "./Chatbot.css";
+import Spinner from "../Spinner";
 
 function Chatbot() {
   const [chatId, setChatId] = useState(null);
@@ -53,9 +54,9 @@ function Chatbot() {
   return (
     <div className="flex w-full max-w-3xl height mx-auto px-4 relative grow flex flex-col gap-6 pt-6">
       {messages.length === 0 && (
-        <div className="mt-3 font-urbanist text-blue text-xl font-light space-y-2">
-          <p>👋 Welcome to AI Agent!</p>
-          <p>Ask me anything about Health Related issues.</p>
+        <div className="mt-3 font-roboto  text-blue text-xl font-light space-y-2">
+          <p>👋 Welcome to Fitness AI Agent!</p>
+          <p>Ask me anything about Fitness related tips.</p>
         </div>
       )}
       <ChatMessages

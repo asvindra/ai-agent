@@ -13,10 +13,11 @@ import Logs from "./components/Logs/Logs";
 import Help from "./components/Help/Help";
 import DailyRecommendations from "./components/Recommendation/DailyRecommendations";
 import OnBoarding from "./components/Onboarding/OnBoarding";
+import { getAccessToken } from "./utils";
 
 const isAuthenticated = () => {
   // Replace with actual authentication logic
-  return true || localStorage.getItem("userId") !== null || false;
+  return true || getAccessToken() !== null || false;
 };
 
 const AuthenticatedRoute = ({ children }) => {

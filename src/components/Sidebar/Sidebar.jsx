@@ -1,3 +1,4 @@
+import { getAccessToken } from "@/utils";
 import React from "react";
 import {
   FaDashcube,
@@ -16,7 +17,8 @@ function Sidebar() {
   const handleOnClick = (route) => {
     switch (route) {
       case "logout":
-        navigate("/logout");
+        localStorage.clear();
+        navigate("/onboarding");
         break;
       case "dashboard":
         navigate("/dashboard");
@@ -42,7 +44,7 @@ function Sidebar() {
     <div className="h-full w-20 fixed top-0 left-0 bg-gray-800 p-5">
       <h2 className="text-white text-center text-2xl mb-5">FAA</h2>
       <ul className="list-none p-0">
-        <li
+        {/* <li
           className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer"
           onClick={() => handleOnClick("dashboard")}
         >
@@ -50,7 +52,7 @@ function Sidebar() {
             className="mx-auto mb-1"
             onClick={() => handleOnClick("dashboard")}
           />
-        </li>
+        </li> */}
         <li
           className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer"
           onClick={() => handleOnClick("logs")}
@@ -69,12 +71,14 @@ function Sidebar() {
             onClick={() => handleOnClick("help")}
           />
         </li>
-        <li className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer">
-          <FaWpforms
-            className="mx-auto mb-1"
-            onClick={() => handleOnClick("onboarding")}
-          />
-        </li>
+        {!getAccessToken() && (
+          <li className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer">
+            <FaWpforms
+              className="mx-auto mb-1"
+              onClick={() => handleOnClick("onboarding")}
+            />
+          </li>
+        )}
         <li className="p-2 text-center text-white hover:bg-gray-700 cursor-pointer">
           <FaSignOutAlt
             className="mx-auto mb-1"
