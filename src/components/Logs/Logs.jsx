@@ -36,12 +36,22 @@ const Logs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
+    // Map activity level to scale 1 to 5
+    const activityLevelMap = {
+      Sedentary: 1,
+      "Lightly active": 2,
+      "Moderately active": 3,
+      "Very active": 4,
+      "Super active": 5,
+    };
+
     const response = await post(
       "/log",
       {
         userId: getAccessToken(),
         calories: Number(calories),
-        activityLevel: Number(activityLevel),
+        activityLevel: activityLevelMap[activityLevel] || 0,
       },
       getAccessToken()
     );
@@ -66,6 +76,7 @@ const Logs = () => {
               type="number"
               value={calories}
               onChange={(e) => setCalories(e.target.value)}
+              placeholder="Enter calories"
               className="mt-1 p-2 block w-full bg-white-800 text-black rounded-md"
               required
             />
@@ -74,13 +85,19 @@ const Logs = () => {
             <label className="block text-sm font-bold text-white-300">
               Activity Level
             </label>
-            <input
-              type="number"
+            <select
               value={activityLevel}
               onChange={(e) => setActivityLevel(e.target.value)}
               className="mt-1 p-2 block w-full bg-white-800 text-black rounded-md"
               required
-            />
+            >
+              <option value="">Select activity level</option>
+              <option value="Sedentary">Sedentary</option>
+              <option value="Lightly active">Lightly active</option>
+              <option value="Moderately active">Moderately active</option>
+              <option value="Very active">Very active</option>
+              <option value="Super active">Super active</option>
+            </select>
           </div>
           <button
             type="submit"
@@ -93,6 +110,9 @@ const Logs = () => {
       <div className="logs-list-container w-1/2 pl-4">
         <h2 className="text-xl font-semibold mb-6">Activity Logs</h2>
         <ul className="logs-list space-y-4">
+          {logs.length === 0 && (
+            <div className=" text-gray-400">No activity logs found</div>
+          )}
           {logs.map((log, index) => (
             <li
               key={index}

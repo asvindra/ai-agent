@@ -54,6 +54,7 @@ const OnBoarding = () => {
             <input
               type="number"
               value={weight}
+              placeholder="Enter your weight"
               onChange={(e) => setWeight(e.target.value)}
             />
           </div>
@@ -62,6 +63,7 @@ const OnBoarding = () => {
             <input
               type="number"
               value={height}
+              placeholder="Enter your height"
               onChange={(e) => setHeight(e.target.value)}
             />
           </div>
@@ -70,6 +72,7 @@ const OnBoarding = () => {
             <input
               type="text"
               value={geography}
+              placeholder="Enter your country"
               onChange={(e) => setGeography(e.target.value)}
             />
           </div>
@@ -78,6 +81,7 @@ const OnBoarding = () => {
             <input
               type="number"
               value={age}
+              placeholder="Enter your age"
               onChange={(e) => setAge(e.target.value)}
             />
           </div>
