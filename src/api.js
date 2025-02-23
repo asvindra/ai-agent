@@ -1,6 +1,10 @@
 const BASE_URL = "https://primary-mouse-assuring.ngrok-free.app/";
 const API_BASE_URL = "https://primary-mouse-assuring.ngrok-free.app/api";
 
+// const BASE_URL = "https://alb-be-1394598260.us-east-1.elb.amazonaws.com/";
+// const API_BASE_URL =
+//   "https://alb-be-1394598260.us-east-1.elb.amazonaws.com/api";
+
 export async function createChat(token) {
   const res = await fetch(BASE_URL + "/chats", {
     method: "POST",

@@ -16,35 +16,25 @@ import OnBoarding from "./components/Onboarding/OnBoarding";
 import { getAccessToken } from "./utils";
 
 const isAuthenticated = () => {
-  // Replace with actual authentication logic
-  return true || getAccessToken() !== null || false;
+  return getAccessToken() !== null;
 };
 
 const AuthenticatedRoute = ({ children }) => {
-  return isAuthenticated() ? children : <Navigate to="/login" />;
+  return isAuthenticated() ? children : <Navigate to="/onboarding" />;
 };
 
 const NonAuthenticatedRoute = ({ children }) => {
-  return !isAuthenticated() ? children : <Navigate to="/dashboard" />;
+  return !isAuthenticated() ? children : <Navigate to="/logs" />;
 };
 
 const AppRouter = () => {
-  const userId = ""; //user id
+  const userId = getAccessToken();
   return (
     <Router>
-      {isAuthenticated() && <Header />}
+      {<Header />}
       <div className="app-container">
-        {isAuthenticated() && <Sidebar />}
+        {<Sidebar />}
         <Routes>
-          import OnBoarding from './OnBoarding'; // Existing routes
-          <Route
-            path="/login"
-            element={
-              <NonAuthenticatedRoute>
-                <Login />
-              </NonAuthenticatedRoute>
-            }
-          />
           <Route
             path="/logs"
             element={
@@ -70,19 +60,11 @@ const AppRouter = () => {
             }
           />
           <Route
-            path="/onboarding"
-            element={
-              <AuthenticatedRoute>
-                <OnBoarding />
-              </AuthenticatedRoute>
-            }
-          />
-          <Route
             path="/*"
             element={
-              <AuthenticatedRoute>
-                <App />
-              </AuthenticatedRoute>
+              <NonAuthenticatedRoute>
+                <OnBoarding />
+              </NonAuthenticatedRoute>
             }
           />
         </Routes>
